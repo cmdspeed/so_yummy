@@ -16,5 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/components/Onboarding/.tsx"]
+  "include": [
+    "src",
+    "src/components/Onboarding/.tsx",
+    "src/custom.d.ts",
+    "src/components"
+  ]
 }
