@@ -10,10 +10,10 @@ function App() {
     <>
       <Suspense fallback={<div>LOADING</div>}>
         <Routes>
-          <Route path="/" element={<Wellcome />} />
+          <Route path="/wellcome" element={<Wellcome />} />
           <Route path="/register" element={<Register />} />
           <Route path="/signin" element={<Signin />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to="/wellcome" />} />
         </Routes>
       </Suspense>
     </>
