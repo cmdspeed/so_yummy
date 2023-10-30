@@ -1,11 +1,13 @@
 import { OrderImg } from "../../components/OrderImg/OrderImg";
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
-import { Wrapper } from "./RegisterPage.styled";
+import { Wrapper, ImgContainer } from "./RegisterPage.styled";
 
 const RegisterPage = () => {
   return (
     <Wrapper>
-      <OrderImg />
+      <ImgContainer>
+        <OrderImg />
+      </ImgContainer>
       <RegisterForm />
     </Wrapper>
   );

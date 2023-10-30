@@ -1,11 +1,17 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import icons from "../../assets/icons.svg";
+import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import {
   InputWrapper,
   Input,
   PasswordToggle,
+  Wrapper,
+  StyledForm,
   Button,
+  Title,
+  SVG,
+  Container,
 } from "./RegisterForm.styled";
 
 const RegistrationSchema = Yup.object().shape({
@@ -22,37 +28,47 @@ const RegistrationSchema = Yup.object().shape({
 
 const RegisterForm = () => {
   return (
-    <Formik
-      initialValues={{ name: "", email: "", password: "" }}
-      validationSchema={RegistrationSchema}
-      onSubmit={(values, actions) => {
-        // Tu umieść logikę rejestracji, na przykład wywołując API
-        console.log("Form Data:", values);
-      }}
-    >
-      <Form>
-        <InputWrapper>
-          {/* <Svg src="nazwa_svg1.svg" alt="SVG1" /> */}
-          <Input type="text" name="name" placeholder="Name" />
-        </InputWrapper>
-        <ErrorMessage name="name" component="div" />
-        <InputWrapper>
-          {/* <Svg src="nazwa_svg2.svg" alt="SVG2" /> */}
-          <Input type="email" name="email" placeholder="Email" />
-        </InputWrapper>
-        <ErrorMessage name="email" component="div" />
-        <InputWrapper>
-          {/* <Svg src="nazwa_svg3.svg" alt="SVG3" /> */}
-          <Field type="password" name="password" placeholder="Password" />
-          <PasswordToggle
-            // src="svg_oczko1.svg" // Tutaj wstaw odpowiednie ścieżki do SVG
-            alt="Password Toggle"
-          />
-        </InputWrapper>
-        <ErrorMessage name="password" component="div" />
-        <Button type="submit">Sign up</Button>
-      </Form>
-    </Formik>
+    <Container>
+      <Formik
+        initialValues={{ name: "", email: "", password: "" }}
+        validationSchema={RegistrationSchema}
+        onSubmit={(values, actions) => {
+          // Tu umieść logikę rejestracji, na przykład wywołując API
+          console.log("Form Data:", values);
+        }}
+      >
+        <Wrapper>
+          <Title>Registration</Title>
+          <StyledForm>
+            <InputWrapper>
+              <SVG>
+                <use href={`${icons}#name`}></use>
+              </SVG>
+              <Input type="text" name="name" placeholder="Name" />
+            </InputWrapper>
+            <ErrorMessage name="name" component="div" />
+            <InputWrapper>
+              <SVG>
+                <use href={`${icons}#email`}></use>
+              </SVG>
+              <Input type="email" name="email" placeholder="Email" />
+            </InputWrapper>
+            <ErrorMessage name="email" component="div" />
+            <InputWrapper>
+              <SVG>
+                <use href={`${icons}#password`}></use>
+              </SVG>
+              <Input type="password" name="password" placeholder="Password" />
+              <PasswordToggle>
+                <use href={`${icons}#eyeOpen`}></use>
+              </PasswordToggle>
+            </InputWrapper>
+            <ErrorMessage name="password" component="div" />
+            <Button type="submit">Sign up</Button>
+          </StyledForm>
+        </Wrapper>
+      </Formik>
+    </Container>
   );
 };
 
