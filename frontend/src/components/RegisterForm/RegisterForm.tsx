@@ -12,6 +12,8 @@ import {
   Title,
   SVG,
   Container,
+  SignIn,
+  LinkContainer,
 } from "./RegisterForm.styled";
 
 const RegistrationSchema = Yup.object().shape({
@@ -41,24 +43,24 @@ const RegisterForm = () => {
           <Title>Registration</Title>
           <StyledForm>
             <InputWrapper>
+              <Input type="text" name="name" placeholder="Name" />
               <SVG>
                 <use href={`${icons}#name`}></use>
               </SVG>
-              <Input type="text" name="name" placeholder="Name" />
             </InputWrapper>
             <ErrorMessage name="name" component="div" />
             <InputWrapper>
+              <Input type="email" name="email" placeholder="Email" />
               <SVG>
                 <use href={`${icons}#email`}></use>
               </SVG>
-              <Input type="email" name="email" placeholder="Email" />
             </InputWrapper>
             <ErrorMessage name="email" component="div" />
             <InputWrapper>
+              <Input type="password" name="password" placeholder="Password" />
               <SVG>
                 <use href={`${icons}#password`}></use>
               </SVG>
-              <Input type="password" name="password" placeholder="Password" />
               <PasswordToggle>
                 <use href={`${icons}#eyeOpen`}></use>
               </PasswordToggle>
@@ -68,6 +70,9 @@ const RegisterForm = () => {
           </StyledForm>
         </Wrapper>
       </Formik>
+      <LinkContainer>
+        <SignIn to="/signin">Sign In</SignIn>
+      </LinkContainer>
     </Container>
   );
 };
