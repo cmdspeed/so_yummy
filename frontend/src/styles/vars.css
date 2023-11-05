@@ -4,4 +4,7 @@
     --form-background: #2a2c36;
     --opacity-white-color: rgba(250, 250, 250, 0.8);
     --opacity-brand-color: rgba(139, 170, 54, 0.8);
+    --error: #E74A3B;
+    --warning: #F6C23E;
+    --success: #3CBC81;
 }

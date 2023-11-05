@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Form, Field, ErrorMessage } from "formik";
 import bgFormMobile from "../../assets/bg-form-mobile.svg";
 import { Link } from "react-router-dom";
 
@@ -24,7 +24,7 @@ export const InputWrapper = styled.div`
   position: relative;
 `;
 
-export const SVG = styled.svg`
+export const Svg = styled.svg`
   width: 18px;
   height: 18px;
   stroke-width: 1.5px;
@@ -70,13 +70,23 @@ export const Input = styled(Field)`
 
     border: 1px solid var(--opacity-brand-color);
     color: var(--opacity-brand-color);
-    & ~ ${SVG} {
+    & ~ ${Svg} {
       stroke: var(--opacity-brand-color);
     }
 
     &::placeholder {
       color: var(--opacity-brand-color);
     }
+  }
+  &:-webkit-autofill {
+    background-color: transparent;
+    box-shadow: 0 0 0 100px var(--form-background) inset;
+    color: var(--font-white-color);
+    -webkit-text-fill-color: var(--font-white-color);
+  }
+  &:-webkit-autofill:focus {
+    color: var(--font-white-color);
+    -webkit-text-fill-color: var(--opacity-brand-color);
   }
 `;
 
@@ -123,4 +133,15 @@ export const SignIn = styled(Link)`
 export const LinkContainer = styled.div`
   text-align: center;
   margin-top: 18px;
+`;
+
+export const ErrorMsg = styled(ErrorMessage)`
+  color: var(--error);
+  font-size: 0.87rem;
+  font-weight: 400;
+`;
+
+export const ErrorPassword = styled.div`
+  font-size: 0.87rem;
+  font-weight: 400;
 `;

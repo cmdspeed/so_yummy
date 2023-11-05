@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import icons from "../../assets/icons.svg";
-import { Formik, Field, ErrorMessage } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
+
 import {
   InputWrapper,
   Input,
@@ -10,10 +11,12 @@ import {
   StyledForm,
   Button,
   Title,
-  SVG,
+  Svg,
   Container,
   SignIn,
   LinkContainer,
+  ErrorMsg,
+  ErrorPassword,
 } from "./RegisterForm.styled";
 
 const RegistrationSchema = Yup.object().shape({
@@ -23,49 +26,117 @@ const RegistrationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email address")
     .required("Email is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters"),
+  password: Yup.string().required("Password is required"),
 });
 
 const RegisterForm = () => {
+  const [passwordMessage, setPasswordMessage] = useState("");
+  const [showMessage, setShowMessage] = useState(false);
+  const [status, setStatus] = useState("");
+
+  let fontColor = "--font-white-color";
+
+  if (status === "error") {
+    fontColor = "--error";
+  } else if (status === "warning") {
+    fontColor = "--warning";
+  } else if (status === "success") {
+    fontColor = "--success";
+  }
+
   return (
     <Container>
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
         validationSchema={RegistrationSchema}
         onSubmit={(values, actions) => {
-          // Tu umieść logikę rejestracji, na przykład wywołując API
-          console.log("Form Data:", values);
+          const password = values.password;
+          const minLength = 8;
+          const hasUpperCase = /[A-Z]/.test(password);
+          const hasLowerCase = /[a-z]/.test(password);
+          const hasNumber = /\d/.test(password);
+          const hasSpecialChar = /[!@#$%^&*]/.test(password);
+
+          let newStrength = "Your password is to short";
+          let newStatus = "";
+
+          if (
+            password.length >= minLength &&
+            hasUpperCase &&
+            hasLowerCase &&
+            hasNumber &&
+            hasSpecialChar
+          ) {
+            newStatus = "success";
+            newStrength = "Password is secure";
+          } else if (
+            password.length >= minLength &&
+            (hasUpperCase || hasLowerCase || hasNumber || hasSpecialChar)
+          ) {
+            newStatus = "warning";
+            newStrength = "Your password is little secure";
+          } else if (password.length <= minLength) {
+            newStatus = "error";
+            newStrength = "Your password is to short (min 8 charakters)";
+          }
+          setStatus(newStatus);
+          setShowMessage(true);
+          setPasswordMessage(newStrength);
+
+          console.log(password);
+          if (newStatus === "warning" || newStatus === "success") {
+            console.log("Form Data:", values);
+          }
         }}
       >
         <Wrapper>
           <Title>Registration</Title>
           <StyledForm>
             <InputWrapper>
-              <Input type="text" name="name" placeholder="Name" />
-              <SVG>
+              <Input
+                type="text"
+                name="name"
+                placeholder="Name"
+                autoComplete="off"
+              />
+              <Svg>
                 <use href={`${icons}#name`}></use>
-              </SVG>
+              </Svg>
             </InputWrapper>
-            <ErrorMessage name="name" component="div" />
+            <ErrorMsg name="name" component="div" />
             <InputWrapper>
-              <Input type="email" name="email" placeholder="Email" />
-              <SVG>
+              <Input
+                type="email"
+                name="email"
+                placeholder="Email"
+                autoComplete="off"
+              />
+              <Svg>
                 <use href={`${icons}#email`}></use>
-              </SVG>
+              </Svg>
             </InputWrapper>
-            <ErrorMessage name="email" component="div" />
+            <ErrorMsg name="email" component="div" />
             <InputWrapper>
-              <Input type="password" name="password" placeholder="Password" />
-              <SVG>
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                autoComplete="off"
+              />
+              <Svg>
                 <use href={`${icons}#password`}></use>
-              </SVG>
+              </Svg>
               <PasswordToggle>
                 <use href={`${icons}#eyeOpen`}></use>
               </PasswordToggle>
             </InputWrapper>
-            <ErrorMessage name="password" component="div" />
+            <div style={{ color: `var(${fontColor})` }}>
+              {showMessage ? (
+                <ErrorPassword>{passwordMessage}</ErrorPassword>
+              ) : (
+                <ErrorMsg name="password" component="div" />
+              )}
+            </div>
             <Button type="submit">Sign up</Button>
           </StyledForm>
         </Wrapper>
@@ -76,5 +147,4 @@ const RegisterForm = () => {
     </Container>
   );
 };
-
 export default RegisterForm;
