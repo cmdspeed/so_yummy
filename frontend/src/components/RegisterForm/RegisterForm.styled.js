@@ -15,6 +15,10 @@ export const Wrapper = styled.section`
   margin: 0 20px;
   padding: 32px 28px 40px;
   position: relative;
+  @media (min-width: 768px) {
+    margin: 0 134px;
+    padding: 32px 50px 44px;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -22,6 +26,9 @@ export const InputWrapper = styled.div`
   align-items: center;
   margin-bottom: 12px;
   position: relative;
+  @media (min-width: 768px) {
+    margin-bottom: 24px;
+  }
 `;
 
 export const Svg = styled.svg`
@@ -32,6 +39,10 @@ export const Svg = styled.svg`
   position: absolute;
   left: 14px;
   stroke: #fafafa;
+  @media (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 export const PasswordToggle = styled.svg`
@@ -41,6 +52,10 @@ export const PasswordToggle = styled.svg`
   right: 14px;
   cursor: pointer;
   fill: var(--opacity-white-color);
+  @media (min-width: 768px) {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 export const Input = styled(Field)`
@@ -88,6 +103,14 @@ export const Input = styled(Field)`
     color: var(--font-white-color);
     -webkit-text-fill-color: var(--opacity-brand-color);
   }
+  @media (min-width: 768px) {
+    height: 59px;
+    padding: 0 0 0 50px;
+    &::placeholder {
+      font-size: 1.125rem;
+      letter-spacing: -0.02rem;
+    }
+  }
 `;
 
 export const Button = styled.button`
@@ -99,10 +122,16 @@ export const Button = styled.button`
   width: 100%;
   padding: 14px 0;
 
+  margin: 16px auto;
+
   color: var(--font-white-color);
   font-size: 1rem;
   text-align: center;
   line-height: 1.12;
+  @media (min-width: 768px) {
+    margin: 26px auto 0;
+    padding: 16.05px 0;
+  }
 `;
 
 export const Title = styled.h1`
@@ -113,6 +142,12 @@ export const Title = styled.h1`
   letter-spacing: 0.03rem;
 
   margin: 0 auto 18px;
+
+  @media (min-width: 768px) {
+    font-size: 1.75rem;
+    line-height: 1.07;
+    margin: 0 auto 32px;
+  }
 `;
 
 export const Container = styled.div`
@@ -122,12 +157,18 @@ export const Container = styled.div`
   background-repeat: no-repeat;
   height: 100vh;
   margin: -42px auto 0;
+  @media (min-width: 768px) {
+    margin: -16px auto 0;
+  }
 `;
 
 export const SignIn = styled(Link)`
   color: var(--font-white-color);
   font-size: 0.87rem;
   text-decoration-line: underline;
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 export const LinkContainer = styled.div`
@@ -139,9 +180,15 @@ export const ErrorMsg = styled(ErrorMessage)`
   color: var(--error);
   font-size: 0.87rem;
   font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 export const ErrorPassword = styled.div`
   font-size: 0.87rem;
   font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 1rem;
+  }
 `;
