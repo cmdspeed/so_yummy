@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Form, Field, ErrorMessage } from "formik";
 import bgFormMobile from "../../assets/bg-form-mobile.svg";
+import bgFormTablet from "../../assets/bg-form-tablet.svg";
 import { Link } from "react-router-dom";
 
 export const StyledForm = styled(Form)`
@@ -18,6 +19,10 @@ export const Wrapper = styled.section`
   @media (min-width: 768px) {
     margin: 0 134px;
     padding: 32px 50px 44px;
+  }
+  @media (min-width: 1440px) {
+    margin: 0;
+    padding: 44px 50px 50px;
   }
 `;
 
@@ -158,7 +163,19 @@ export const Container = styled.div`
   height: 100vh;
   margin: -42px auto 0;
   @media (min-width: 768px) {
+    background-image: url(${bgFormTablet});
+
     margin: -16px auto 0;
+  }
+  @media (min-width: 1440px) {
+    position: relative;
+    top: 50%;
+    transform: translate(0, calc(50% - 221.5px));
+
+    margin: 0;
+    width: 100%;
+    max-width: 500px;
+    background-image: none;
   }
 `;
 

@@ -29,7 +29,7 @@ const RegistrationSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-const RegisterForm = () => {
+const RegisterForm = ({ isLogin }) => {
   const [passwordMessage, setPasswordMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [status, setStatus] = useState("");

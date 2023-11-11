@@ -8,7 +8,7 @@ const RegisterPage = () => {
       <ImgContainer>
         <OrderImg />
       </ImgContainer>
-      <RegisterForm />
+      <RegisterForm isLogin={false} />
     </Wrapper>
   );
 };
