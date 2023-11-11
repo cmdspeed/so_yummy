@@ -48,16 +48,52 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLoginForm = false }) => {
   const [passwordMessage, setPasswordMessage] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const [status, setStatus] = useState("");
-  const [pass, setPass] = useState("");
 
-  const handlePasswordChange = (
+  const handlePasswordChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
     handleChange: (e: React.ChangeEvent<any>) => void
   ) => {
     handleChange(e);
     const password = e.currentTarget.value;
-    setPass(password);
+
     console.log("test", password);
+    validationPassword(password);
+  };
+
+  const validationPassword = (password: string) => {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*]/.test(password);
+
+    let newStrength = "Your password is to short";
+    let newStatus = "";
+
+    if (
+      password.length >= minLength &&
+      hasUpperCase &&
+      hasLowerCase &&
+      hasNumber &&
+      hasSpecialChar
+    ) {
+      newStatus = "success";
+      newStrength = "Password is secure";
+    } else if (
+      password.length >= minLength &&
+      (hasUpperCase || hasLowerCase || hasNumber || hasSpecialChar)
+    ) {
+      newStatus = "warning";
+      newStrength = "Your password is little secure";
+    } else if (password.length <= minLength) {
+      newStatus = "error";
+      newStrength = "Your password is to short (min 8 charakters)";
+    }
+
+    setStatus(newStatus);
+    setShowMessage(true);
+    setPasswordMessage(newStrength);
+    return newStatus;
   };
 
   let fontColor = "--font-white-color";
@@ -75,45 +111,24 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLoginForm = false }) => {
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
         validationSchema={validationSchema}
-        onSubmit={(values, actions) => {
-          const password = values.password;
-          const minLength = 8;
-          const hasUpperCase = /[A-Z]/.test(password);
-          const hasLowerCase = /[a-z]/.test(password);
-          const hasNumber = /\d/.test(password);
-          const hasSpecialChar = /[!@#$%^&*]/.test(password);
+        onSubmit={async (values, actions) => {
+          const passwordValidationResult = validationPassword(values.password);
 
-          let newStrength = "Your password is to short";
-          let newStatus = "";
-
-          if (
-            password.length >= minLength &&
-            hasUpperCase &&
-            hasLowerCase &&
-            hasNumber &&
-            hasSpecialChar
-          ) {
-            newStatus = "success";
-            newStrength = "Password is secure";
-          } else if (
-            password.length >= minLength &&
-            (hasUpperCase || hasLowerCase || hasNumber || hasSpecialChar)
-          ) {
-            newStatus = "warning";
-            newStrength = "Your password is little secure";
-          } else if (password.length <= minLength) {
-            newStatus = "error";
-            newStrength = "Your password is to short (min 8 charakters)";
+          if (passwordValidationResult === "success") {
+            console.log("Form Data:", values);
+          } else if (passwordValidationResult === "warning") {
+            console.log("Form Data:", values);
+            console.log("Password has warning");
+          } else {
+            // Tutaj możesz obsłużyć błąd i zapobiec wysłaniu formularza
+            console.log("Password has error. Form not submitted.");
           }
-          setStatus(newStatus);
-          setShowMessage(true);
-          setPasswordMessage(newStrength);
 
-          console.log(password);
+          console.log(values.password);
           if (isLoginForm) {
             const { name, ...restValues } = values;
             console.log("Form Data:", restValues);
-          } else if (newStatus === "success") {
+          } else if (status === "success") {
             console.log("Form Data:", values);
           }
         }}

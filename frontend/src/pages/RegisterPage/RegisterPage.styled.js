@@ -8,6 +8,7 @@ export const Wrapper = styled.section`
     gap: 115px;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 
     background-image: url(${bgFormPc});
     background-position: center 410px;

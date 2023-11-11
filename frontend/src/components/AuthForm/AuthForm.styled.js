@@ -168,9 +168,7 @@ export const Container = styled.div`
     margin: -16px auto 0;
   }
   @media (min-width: 1440px) {
-    position: relative;
-    top: 50%;
-    transform: translate(0, calc(50% - 221.5px));
+    height: auto;
 
     margin: 0;
     width: 100%;
