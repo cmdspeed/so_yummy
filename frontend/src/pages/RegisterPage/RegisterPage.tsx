@@ -1,5 +1,5 @@
 import { OrderImg } from "../../components/OrderImg/OrderImg";
-import RegisterForm from "../../components/RegisterForm/RegisterForm";
+import AuthForm from "../../components/AuthForm/AuthForm";
 import { Wrapper, ImgContainer } from "./RegisterPage.styled";
 
 const RegisterPage = () => {
@@ -8,7 +8,7 @@ const RegisterPage = () => {
       <ImgContainer>
         <OrderImg />
       </ImgContainer>
-      <RegisterForm isLogin={false} />
+      <AuthForm />
     </Wrapper>
   );
 };
