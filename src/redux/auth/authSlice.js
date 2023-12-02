@@ -4,6 +4,12 @@ import storage from "redux-persist/lib/storage";
 
 import { logIn, register, logOut, refreshUser } from "./authOperations";
 
+const persistConfig = {
+  key: "auth",
+  storage: storage,
+  whitelist: ["token"],
+};
+
 const handlePending = (state) => {
   state.isLoading = true;
 };
@@ -61,11 +67,5 @@ const authSlice = createSlice({
     },
   },
 });
-
-const persistConfig = {
-  key: "auth",
-  storage: storage,
-  whitelist: ["token"],
-};
 
 export const authReducer = persistReducer(persistConfig, authSlice.reducer);
