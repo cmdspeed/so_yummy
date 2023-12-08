@@ -1,7 +1,6 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
-import { Main } from "./components/Main/Main";
 
 import { useAuth } from "./hooks/useAuth";
 import { refreshUser } from "./redux/auth/authOperations";
@@ -12,6 +11,7 @@ import { PublicRoute } from "./components/PublicRoute";
 const Wellcome = lazy(() => import("./pages/WellcomePage/WellcomePage"));
 const Register = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const Signin = lazy(() => import("./pages/SigninPage/SigninPage"));
+const Main = lazy(() => import("./pages/MainPage/MainPage"));
 
 function App() {
   const dispatch = useAppDispatch();
