@@ -1,8 +1,9 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
+import { BACKEND_URL } from "../../vars/vars";
 
-axios.defaults.baseURL = "http://localhost:3001/api";
+axios.defaults.baseURL = `${BACKEND_URL}/api`;
 
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -18,8 +19,8 @@ export const register = createAsyncThunk(
     try {
       const res = await axios.post("/auth/signup", credentials);
       // After successful registration, add the token to the HTTP header
-      setAuthHeader(res.data.token);
-      return res.data;
+      setAuthHeader(res.data.data.token);
+      return res.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -32,8 +33,9 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post("/auth/login", credentials);
       // After successful login, add the token to the HTTP header
-      setAuthHeader(res.data.token);
-      return res.data;
+      console.log("credentials ", res.data.data.token);
+      setAuthHeader(res.data.data.token);
+      return res.data.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

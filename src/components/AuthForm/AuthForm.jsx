@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import icons from "../../assets/icons.svg";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+import { logIn, register } from "../../redux/auth/authOperations";
 
 import {
   InputWrapper,
@@ -18,6 +20,9 @@ import {
   ErrorMsg,
   ErrorPassword,
 } from "./AuthForm.styled";
+
+import { Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const commonValidation = Yup.object({
   email: Yup.string()
@@ -41,6 +46,7 @@ interface AuthFormProps {
 }
 
 const AuthForm: React.FC<AuthFormProps> = ({ isLoginForm = false }) => {
+  const dispatch = useDispatch();
   const validationSchema = isLoginForm
     ? loginValidation
     : registrationValidation;
@@ -114,13 +120,18 @@ const AuthForm: React.FC<AuthFormProps> = ({ isLoginForm = false }) => {
         onSubmit={async (values, actions) => {
           const passwordValidationResult = validationPassword(values.password);
 
-          if (passwordValidationResult === "success") {
-            console.log("Form Data:", values);
-          } else if (passwordValidationResult === "warning") {
-            console.log("Form Data:", values);
-            console.log("Password has warning");
+          if (
+            (!isLoginForm && passwordValidationResult === "success") ||
+            passwordValidationResult === "warning"
+          ) {
+            dispatch(register(values));
+          }
+          if (
+            (isLoginForm && passwordValidationResult === "success") ||
+            passwordValidationResult === "warning"
+          ) {
+            dispatch(logIn(values));
           } else {
-            // Tutaj możesz obsłużyć błąd i zapobiec wysłaniu formularza
             console.log("Password has error. Form not submitted.");
           }
 

@@ -30,8 +30,8 @@ const authSlice = createSlice({
   extraReducers: {
     [register.pending]: handlePending,
     [register.fulfilled](state, { payload }) {
-      state.user.name = payload.name;
-      state.user.email = payload.email;
+      state.user = payload.user;
+
       state.token = payload.token;
       state.isLoggedIn = true;
       state.isLoading = false;
@@ -40,7 +40,9 @@ const authSlice = createSlice({
     [logIn.pending]: handlePending,
     [logIn.fulfilled](state, { payload }) {
       state.user = payload.user;
+
       state.token = payload.token;
+
       state.isLoggedIn = true;
       state.isLoading = false;
     },
