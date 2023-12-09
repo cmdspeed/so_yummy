@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import icons from "../../assets/icons.svg";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
+
 import { logIn, register } from "../../redux/auth/authOperations";
 
 import {
@@ -21,7 +21,6 @@ import {
   ErrorPassword,
 } from "./AuthForm.styled";
 
-import { Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const commonValidation = Yup.object({
@@ -47,6 +46,7 @@ interface AuthFormProps {
 
 const AuthForm: React.FC<AuthFormProps> = ({ isLoginForm = false }) => {
   const dispatch = useDispatch();
+
   const validationSchema = isLoginForm
     ? loginValidation
     : registrationValidation;
