@@ -15,11 +15,14 @@ const Main = lazy(() => import("./pages/MainPage/MainPage"));
 
 function App() {
   const dispatch = useAppDispatch();
-  const { isRefreshing, isLoggedIn } = useAuth();
+  const { isRefreshing } = useAuth();
 
-  useEffect(() => {
-    dispatch(refreshUser());
-  }, [dispatch]);
+  useEffect(
+    function () {
+      dispatch(refreshUser());
+    },
+    [dispatch]
+  );
 
   if (isRefreshing) {
     return <div>LOADING</div>;
