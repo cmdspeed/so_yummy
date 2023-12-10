@@ -1,4 +1,5 @@
 import { Logo } from "../Logo/Logo";
+import { ThemeToggler } from "../ThemeToggler/ThemeToggler";
 import { Navigation } from "./Navigation/Navigation";
 import { UserLogo } from "./UserLogo/UserLogo";
 
@@ -11,6 +12,7 @@ export const Header = () => {
         <UserLogo />
         <span>UserName</span>
       </div>
+      <ThemeToggler />
     </>
   );
 };
