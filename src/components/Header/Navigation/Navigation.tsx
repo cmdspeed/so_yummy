@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import icons from "../../../assets/icons.svg";
 
 export const Navigation = () => {
   return (
@@ -19,7 +20,11 @@ export const Navigation = () => {
         <NavLink to="/shopping-list">Shopping list</NavLink>
       </li>
       <li>
-        <NavLink to="/search">"ikonka szukajki"</NavLink>
+        <NavLink to="/search">
+          <svg width="24" height="24">
+            <use href={`${icons}#search`} />
+          </svg>
+        </NavLink>
       </li>
     </ul>
   );
