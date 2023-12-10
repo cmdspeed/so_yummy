@@ -18,5 +18,5 @@ export const PrivateRoute: React.FC<PrivateRouteProps> = ({
 
   const shouldRedirect = !isLoggedIn && !isRefreshing;
 
-  return shouldRedirect ? <Navigate to="/signin" /> : <>{children}</>;
+  return shouldRedirect ? <Navigate to="/Wellcome" /> : <>{children}</>;
 };

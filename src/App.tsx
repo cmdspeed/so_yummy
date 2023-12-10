@@ -30,7 +30,14 @@ function App() {
   return (
     <Suspense fallback={<div>LOADING</div>}>
       <Routes>
-        <Route path="/Wellcome" element={<Wellcome />} />
+        <Route
+          path="/Wellcome"
+          element={
+            <PublicRoute>
+              <Wellcome />
+            </PublicRoute>
+          }
+        />
         <Route
           path="/register"
           element={
