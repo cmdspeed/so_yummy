@@ -13,7 +13,10 @@ export const Logo: React.FC<LogoProps> = ({
   color = "var(--brand-color)",
 }) => {
   return (
-    <Link to="/" style={{ width: `${width}px`, height: `${height}px` }}>
+    <Link
+      to="/"
+      style={{ width: `${width}px`, height: `${height}px`, display: "block" }}
+    >
       <svg width={width} height={height} fill={color}>
         <use href={`${icons}#logo`}></use>
       </svg>
