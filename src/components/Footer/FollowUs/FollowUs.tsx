@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import icons from "../../../assets/icons.svg";
+import { StyledList } from "./FollowUs.styled";
 
 interface SocialMediaLink {
   id: string;
@@ -20,7 +21,7 @@ export const FollowUs: React.FC = () => {
     {
       id: "youtube",
       platform: "YouTube",
-      icon: "youtube.svg",
+      icon: "youtube",
       url: "https://www.youtube.com/",
     },
     {
@@ -39,8 +40,7 @@ export const FollowUs: React.FC = () => {
 
   return (
     <div>
-      <h2>Follow Us</h2>
-      <ul>
+      <StyledList>
         {socialMediaLinks.map((socialMedia) => (
           <li key={socialMedia.id}>
             <Link
@@ -48,14 +48,13 @@ export const FollowUs: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <svg>
+              <svg width="20" height="20" fill="var(--brand-color)">
                 <use xlinkHref={`${icons}#${socialMedia.icon}`} />
               </svg>
-              {socialMedia.platform}
             </Link>
           </li>
         ))}
-      </ul>
+      </StyledList>
     </div>
   );
 };

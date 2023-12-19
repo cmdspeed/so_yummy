@@ -1,15 +1,24 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import icons from "../../../assets/icons.svg";
+import {
+  IconMessage,
+  InputWrapper,
+  StyledButton,
+  StyledError,
+  StyledFiled,
+  StyledForm,
+} from "./SubscribeForm.styled";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string()
-    .email("Nieprawidłowy adres e-mail")
-    .required("To pole jest wymagane"),
+    .email("Incorrect e-mail address")
+    .required("This field is required"),
 });
 
 const sendEmail = async (values: { email: string }) => {
-  console.log(`Wysyłanie e-maila na adres: ${values.email}`);
+  console.log(`Sending an e-mail to: ${values.email}`);
 };
 
 export const SubscribeForm: React.FC = () => {
@@ -20,29 +29,36 @@ export const SubscribeForm: React.FC = () => {
       onSubmit={async (values, { setSubmitting }) => {
         try {
           await sendEmail(values);
-          alert(
-            "Wiadomość e-mail została wysłana! Użytkownik zapisany do newslettera."
-          );
+          alert("The email has been sent! User subscribed to the newsletter.");
         } catch (error) {
-          alert("Wystąpił błąd podczas wysyłania e-maila.");
+          alert("An error occurred while sending the email.");
         } finally {
           setSubmitting(false);
         }
       }}
     >
       {({ isSubmitting, isValid }) => (
-        <Form>
+        <StyledForm>
           <div>
-            <label htmlFor="email">Adres e-mail:</label>
-            <Field type="email" id="email" name="email" />
-            <ErrorMessage name="email" component="div" />
+            <InputWrapper>
+              <IconMessage width="16" height="12">
+                <use href={`${icons}#message`} />
+              </IconMessage>
+              <StyledFiled
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email address"
+              />
+            </InputWrapper>
+            <StyledError name="email" component="div" />
           </div>
           <div>
-            <button type="submit" disabled={isSubmitting || !isValid}>
-              Wyślij
-            </button>
+            <StyledButton type="submit" disabled={isSubmitting || !isValid}>
+              Subscribe
+            </StyledButton>
           </div>
-        </Form>
+        </StyledForm>
       )}
     </Formik>
   );

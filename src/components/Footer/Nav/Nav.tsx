@@ -1,26 +1,27 @@
 import { NavLink } from "react-router-dom";
+import { NavStyled, StyledLink } from "./Nav.styled";
 
 export const Nav = () => {
   return (
-    <nav>
+    <NavStyled>
       <ul>
-        <li>
+        <StyledLink>
           <NavLink to="/search">Ingredients</NavLink>
-        </li>
+        </StyledLink>
 
-        <li>
+        <StyledLink>
           <NavLink to="/add">Add recipes</NavLink>
-        </li>
-        <li>
+        </StyledLink>
+        <StyledLink>
           <NavLink to="/my">My recipes</NavLink>
-        </li>
-        <li>
+        </StyledLink>
+        <StyledLink>
           <NavLink to="/favorite">Favorites</NavLink>
-        </li>
-        <li>
+        </StyledLink>
+        <StyledLink>
           <NavLink to="/shopping-list">Shopping list</NavLink>
-        </li>
+        </StyledLink>
       </ul>
-    </nav>
+    </NavStyled>
   );
 };

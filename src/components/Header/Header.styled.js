@@ -23,7 +23,7 @@ export const Wraper = styled.div`
 `;
 
 export const UserName = styled.span`
-  color: var(--username-color);
+  color: var(--second-color);
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 1.7;
