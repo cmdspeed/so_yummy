@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
+import { Container, Content } from "./SharedLayout.styled";
 
 export const SharedLayout = ({ children }: any) => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -17,10 +18,12 @@ export const SharedLayout = ({ children }: any) => {
   }, []);
 
   return (
-    <>
-      <Header screenSize={screenSize} />
-      {children}
+    <Container>
+      <Content>
+        <Header screenSize={screenSize} />
+        {children}
+      </Content>
       <Footer />
-    </>
+    </Container>
   );
 };
