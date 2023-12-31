@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { Container, Content } from "./SharedLayout.styled";
+import { Outlet } from "react-router";
 
-export const SharedLayout = ({ children }: any) => {
+const SharedLayout = () => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
   useEffect(() => {
     const handleResize = () => {
@@ -18,12 +19,15 @@ export const SharedLayout = ({ children }: any) => {
   }, []);
 
   return (
-    <Container>
-      <Content>
-        <Header screenSize={screenSize} />
-        {children}
-      </Content>
-      <Footer />
-    </Container>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Container>
+        <Content>
+          <Header screenSize={screenSize} />
+          <Outlet />
+        </Content>
+        <Footer />
+      </Container>
+    </Suspense>
   );
 };
+export default SharedLayout;

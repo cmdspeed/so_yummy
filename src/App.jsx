@@ -7,6 +7,7 @@ import { refreshUser } from "./redux/auth/authOperations";
 import { useAppDispatch } from "./hooks/dispatch";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { PublicRoute } from "./components/PublicRoute";
+import SharedLayout from "./components/SharedLayout/SharedLayout";
 
 const Wellcome = lazy(() => import("./pages/WellcomePage/WellcomePage"));
 const Register = lazy(() => import("./pages/RegisterPage/RegisterPage"));
@@ -31,7 +32,7 @@ function App() {
     <Suspense fallback={<div>LOADING</div>}>
       <Routes>
         <Route
-          path="/Wellcome"
+          path="Wellcome"
           element={
             <PublicRoute>
               <Wellcome />
@@ -54,14 +55,36 @@ function App() {
             </PublicRoute>
           }
         />
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <Main />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/" element={<SharedLayout />}>
+          <Route
+            index
+            element={<PrivateRoute component={<Main />} redirectTo="/main" />}
+          />
+          <Route
+            path="search"
+            element={<PrivateRoute component={<Main />} redirectTo="/search" />}
+          />
+          <Route
+            path="add"
+            element={<PrivateRoute component={<Main />} redirectTo="/add" />}
+          />
+          <Route
+            path="my"
+            element={<PrivateRoute component={<Main />} redirectTo="/my" />}
+          />
+          <Route
+            path="favorite"
+            element={
+              <PrivateRoute component={<Main />} redirectTo="/favorite" />
+            }
+          />
+          <Route
+            path="shopping-list"
+            element={
+              <PrivateRoute component={<Main />} redirectTo="/shopping-list" />
+            }
+          />
+        </Route>
         <Route path="*" element={<Navigate to="/Wellcome" />} />
       </Routes>
     </Suspense>

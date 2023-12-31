@@ -1,11 +1,5 @@
-import { SharedLayout } from "../../components/SharedLayout/SharedLayout";
-
 const MainPage = () => {
-  return (
-    <>
-      <SharedLayout></SharedLayout>
-    </>
-  );
+  return <h1>test</h1>;
 };
 
 export default MainPage;
