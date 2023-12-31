@@ -56,8 +56,10 @@ function App() {
           }
         />
         <Route path="/" element={<SharedLayout />}>
+          <Route path="/" element={<Navigate to="/main" />} />
           <Route
             index
+            path="/main"
             element={<PrivateRoute component={<Main />} redirectTo="/main" />}
           />
           <Route
