@@ -2,7 +2,9 @@ import { Suspense, useEffect, useState } from "react";
 import { Footer } from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { Container, Content } from "./SharedLayout.styled";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
+import WellcomePage from "../../pages/WellcomePage/WellcomePage";
 
 const SharedLayout = () => {
   const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -17,17 +19,27 @@ const SharedLayout = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
+  const { user } = useAuth();
+  let isUser = false;
+  if (user.name === null) {
+    isUser = false;
+  } else {
+    isUser = true;
+  }
+  if (isUser) {
+    return (
       <Container>
         <Content>
           <Header screenSize={screenSize} />
-          <Outlet />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
         </Content>
         <Footer />
       </Container>
-    </Suspense>
-  );
+    );
+  } else {
+    return <WellcomePage />;
+  }
 };
 export default SharedLayout;

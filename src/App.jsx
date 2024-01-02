@@ -2,21 +2,22 @@ import React, { lazy, Suspense, useEffect } from "react";
 import "./App.css";
 import { Route, Routes, Navigate } from "react-router-dom";
 
-import { useAuth } from "./hooks/useAuth";
 import { refreshUser } from "./redux/auth/authOperations";
 import { useAppDispatch } from "./hooks/dispatch";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { PublicRoute } from "./components/PublicRoute";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
+import { useAuth } from "./hooks/useAuth";
 
 const Wellcome = lazy(() => import("./pages/WellcomePage/WellcomePage"));
 const Register = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const Signin = lazy(() => import("./pages/SigninPage/SigninPage"));
 const Main = lazy(() => import("./pages/MainPage/MainPage"));
+const Search = lazy(() => import("./pages/SearchPage/SearchPage"));
 
 function App() {
   const dispatch = useAppDispatch();
-  const { isRefreshing } = useAuth();
+  const { isRefreshing, isLoggedIn } = useAuth();
 
   useEffect(
     function () {
@@ -24,15 +25,15 @@ function App() {
     },
     [dispatch]
   );
-
   if (isRefreshing) {
-    return <div>LOADING</div>;
+    return <div>Refreshing user ...</div>;
   }
+
   return (
     <Suspense fallback={<div>LOADING</div>}>
       <Routes>
         <Route
-          path="Wellcome"
+          path="/wellcome"
           element={
             <PublicRoute>
               <Wellcome />
@@ -55,39 +56,26 @@ function App() {
             </PublicRoute>
           }
         />
+
         <Route path="/" element={<SharedLayout />}>
-          <Route path="/" element={<Navigate to="/main" />} />
+          <Route index element={<PrivateRoute component={<Main />} />} />
           <Route
-            index
-            path="/main"
-            element={<PrivateRoute component={<Main />} redirectTo="/main" />}
+            path="/search"
+            element={<PrivateRoute component={<Search />} />}
+          />
+          <Route path="/add" element={<PrivateRoute component={<Main />} />} />
+          <Route path="/my" element={<PrivateRoute component={<Main />} />} />
+          <Route
+            path="/favorite"
+            element={<PrivateRoute component={<Main />} />}
           />
           <Route
-            path="search"
-            element={<PrivateRoute component={<Main />} redirectTo="/search" />}
-          />
-          <Route
-            path="add"
-            element={<PrivateRoute component={<Main />} redirectTo="/add" />}
-          />
-          <Route
-            path="my"
-            element={<PrivateRoute component={<Main />} redirectTo="/my" />}
-          />
-          <Route
-            path="favorite"
-            element={
-              <PrivateRoute component={<Main />} redirectTo="/favorite" />
-            }
-          />
-          <Route
-            path="shopping-list"
-            element={
-              <PrivateRoute component={<Main />} redirectTo="/shopping-list" />
-            }
+            path="/shopping-list"
+            element={<PrivateRoute component={<Main />} />}
           />
         </Route>
-        <Route path="*" element={<Navigate to="/Wellcome" />} />
+
+        <Route path="*" element={<Navigate to="/wellcome" />} />
       </Routes>
     </Suspense>
   );
