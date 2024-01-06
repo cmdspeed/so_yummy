@@ -28,7 +28,7 @@ export const TitleWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h3`
   padding: 1rem;
   font-weight: 500;
   line-height: 1.25;
