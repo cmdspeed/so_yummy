@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { fetchPreviewCategories } from "../../redux/previewCategory/operations";
+import { SingielRecipe } from "../SingielRecipe/SingielRecipe";
 
 export const PreviewCategory = () => {
   const dispatch = useDispatch();
@@ -20,29 +21,40 @@ export const PreviewCategory = () => {
     };
     getRecipes();
   }, [dispatch]);
-  console.log(data);
+
+  const calculateRecipesToShow = () => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth >= 1440) {
+      return 4; // PC
+    } else if (screenWidth >= 768) {
+      return 2; // Tablet
+    } else {
+      return 1; // Mobile
+    }
+  };
+
   return (
     <div>
-      <h1>Preview Categories</h1>
       <ul>
-        {data.map((category) => (
-          <li key={category.category}>
-            <h2>{category.category}</h2>
-            {/* karta/ty z przepisami tymczasowo jeden przepis */}
-            {category.recipes.map((recipe) => {
-              console.log("recipe: ", recipe);
-              return (
-                <img
-                  width={343}
-                  height={323}
-                  key={recipe.image}
-                  alt=""
-                  src={recipe.image}
-                />
-              );
-            })}
-          </li>
-        ))}
+        {data.map((category) => {
+          return (
+            <li key={category.category}>
+              <h2>{category.category}</h2>
+
+              {category.recipes
+                .slice(0, calculateRecipesToShow())
+                .map((recipe) => {
+                  console.log("recipe: ", recipe);
+                  return (
+                    <>
+                      <SingielRecipe key={recipe._id} recipe={recipe} />
+                      <button>See all</button>
+                    </>
+                  );
+                })}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
