@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchPreviewCategories } from "../../redux/previewCategory/operations";
 import { SingielRecipe } from "../SingielRecipe/SingielRecipe";
+import { SquareButton } from "../Buttons/SquareButton/SquareButton";
+import { ButtonContainer, ButtonWrapper } from "./PreviewCategory.styled";
 
 export const PreviewCategory = () => {
   const dispatch = useDispatch();
@@ -48,7 +50,11 @@ export const PreviewCategory = () => {
                   return (
                     <>
                       <SingielRecipe key={recipe._id} recipe={recipe} />
-                      <button>See all</button>
+                      <ButtonContainer>
+                        <ButtonWrapper>
+                          <SquareButton>See all</SquareButton>
+                        </ButtonWrapper>
+                      </ButtonContainer>
                     </>
                   );
                 })}
