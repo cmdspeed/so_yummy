@@ -1,7 +1,7 @@
-import { PreviewCategory } from "../../components/PreviewCategory/PreviewCategory";
+import { Main } from "../../components/Main/Main";
 
 const MainPage = () => {
-  return <PreviewCategory />;
+  return <Main />;
 };
 
 export default MainPage;
