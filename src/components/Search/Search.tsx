@@ -15,6 +15,12 @@ export const Search: React.FC = () => {
     }
   };
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <Wrapper>
       <SearchInput
@@ -22,6 +28,7 @@ export const Search: React.FC = () => {
         type="text"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
+        onKeyDown={handleKeyPress}
       />
       <ContainerButton>
         <RoundButton onClick={handleSearch}>Search</RoundButton>
