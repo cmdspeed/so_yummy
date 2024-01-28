@@ -19,7 +19,7 @@ export const ContainerButton = styled.div`
 `;
 
 export const Wrapper = styled.div`
-  margin: 0 auto;
+  margin: 1.5rem auto 0;
   display: flex;
   width: 16.43rem;
 `;
