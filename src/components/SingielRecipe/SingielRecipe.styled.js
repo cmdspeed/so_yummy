@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 21.43rem;
+  max-width: 21.43rem;
   height: 20.18rem;
   position: relative;
 
