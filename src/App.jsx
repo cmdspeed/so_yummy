@@ -14,10 +14,11 @@ const Register = lazy(() => import("./pages/RegisterPage/RegisterPage"));
 const Signin = lazy(() => import("./pages/SigninPage/SigninPage"));
 const Main = lazy(() => import("./pages/MainPage/MainPage"));
 const Search = lazy(() => import("./pages/SearchPage/SearchPage"));
+const Cagtegory = lazy(() => import("./pages/CategoriesPage/CategoriesPage"));
 
 function App() {
   const dispatch = useAppDispatch();
-  const { isRefreshing, isLoggedIn } = useAuth();
+  const { isRefreshing } = useAuth();
 
   useEffect(
     function () {
@@ -72,6 +73,10 @@ function App() {
           <Route
             path="/shopping-list"
             element={<PrivateRoute component={<Main />} />}
+          />
+          <Route
+            path="/categories/:categoryName"
+            element={<PrivateRoute component={<Cagtegory />} />}
           />
         </Route>
 
