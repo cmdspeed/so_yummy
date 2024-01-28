@@ -1,5 +1,28 @@
 import styled from "styled-components";
 
+import bgchooseYourBreakfast from "./img/bg_chooseYourBreakfast.webp";
+import bgchooseYourBreakfast2 from "./img/bg_chooseYourBreakfast@x2.webp";
+export const BgPhoto = styled.div`
+  background: image-set(
+    url(${bgchooseYourBreakfast}) 1x,
+    url(${bgchooseYourBreakfast2}) 2x
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  padding-top: 7.06rem;
+
+  min-width: 20rem;
+  min-height: 18.5rem;
+  /* @media screen and (min-device-pixel-ratio: 2),
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx),
+    (max-width: 375px) {
+  } */
+`;
+
 export const Container = styled.div`
   max-width: 14.063rem;
 
