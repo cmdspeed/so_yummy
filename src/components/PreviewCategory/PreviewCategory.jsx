@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchPreviewCategories } from "../../redux/previewCategory/operations";
 import { SingielRecipe } from "../SingielRecipe/SingielRecipe";
@@ -7,11 +7,20 @@ import { SquareButton } from "../Buttons/SquareButton/SquareButton";
 import {
   ButtonContainer,
   ButtonWrapper,
+  StyledImagePasta3,
   Wrapper,
+  WrapperButton,
 } from "./PreviewCategory.styled";
 
+import kisspngPasta3 from "../../assets/img/mainPage/kisspng-pasta3.webp";
+import { RoundButton } from "../Buttons/RoundButton/RoundButton";
+
 export const PreviewCategory = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const handleClick = () => {
+    navigate(`/categories/beef`);
+  };
 
   const [data, setData] = useState([]);
 
@@ -66,6 +75,17 @@ export const PreviewCategory = () => {
           );
         })}
       </ul>
+      <WrapperButton>
+        <RoundButton
+          onClick={handleClick}
+          bgColor="var(--font-white-color)"
+          borderColor="var(--brand-color)"
+          fontColor="var(--second-color)"
+        >
+          Other categories
+        </RoundButton>
+        <StyledImagePasta3 src={kisspngPasta3} alt="kisspngPasta3" />
+      </WrapperButton>
     </Wrapper>
   );
 };
