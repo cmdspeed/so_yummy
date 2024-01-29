@@ -4,7 +4,11 @@ import { useDispatch } from "react-redux";
 import { fetchPreviewCategories } from "../../redux/previewCategory/operations";
 import { SingielRecipe } from "../SingielRecipe/SingielRecipe";
 import { SquareButton } from "../Buttons/SquareButton/SquareButton";
-import { ButtonContainer, ButtonWrapper } from "./PreviewCategory.styled";
+import {
+  ButtonContainer,
+  ButtonWrapper,
+  Wrapper,
+} from "./PreviewCategory.styled";
 
 export const PreviewCategory = () => {
   const dispatch = useDispatch();
@@ -36,7 +40,7 @@ export const PreviewCategory = () => {
   };
 
   return (
-    <div>
+    <Wrapper>
       <ul>
         {data.map((category) => {
           return (
@@ -62,6 +66,6 @@ export const PreviewCategory = () => {
           );
         })}
       </ul>
-    </div>
+    </Wrapper>
   );
 };

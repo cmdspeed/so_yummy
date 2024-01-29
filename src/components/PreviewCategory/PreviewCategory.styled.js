@@ -9,3 +9,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const Wrapper = styled.div`
+  margin-top: 9.1875rem;
+`;
