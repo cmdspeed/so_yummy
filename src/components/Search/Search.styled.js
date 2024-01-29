@@ -5,10 +5,10 @@ export const SearchInput = styled.input`
   width: 100%;
   height: 3.25rem;
   border-radius: 22px 44px;
-
+  border: none;
   padding: 1.06rem 3rem 1.06rem 2rem;
   &::placeholder {
-    color: rgba(240, 240, 240, 1);
+    color: rgba(189, 189, 189, 1);
   }
 `;
 export const ContainerButton = styled.div`
